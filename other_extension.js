@@ -42,24 +42,14 @@ window.func=function(lib,game,ui,get,ai,_status){
 			"name":"<span style='text-decoration: underline'>自动更新扩展ol</span>",
 			"clear":true,
 			"onclick":function(){
-				game.download('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master/下载检测.js','extension/扩展ol/下载检测.js',function(){},function(){
-					alert('你的设备不支持内置更新，请手动更新');
-					lib.extensionOL_checkDownload==true;
+				game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/extension.js','extension/扩展ol/extension.js',function(){
+					alert('扩展ol本体更新完毕');
+				},function(){
+					alert('扩展ol本体更新失败');
 				});
-				setTimeout(function(){
-					if(lib.extensionOL_checkDownload==true){
-						game.download('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master/extension.js','extension/扩展ol/extension.js',function(){
-							alert('扩展ol本体更新完毕');
-						},function(){
-							alert('扩展ol本体更新失败');
-						});
-					}else{
-						delete lib.extensionOL_checkDownload;
-					};
-				},500);
 			},
 		};
-		if(lib.config.noname_extensionOL_version1=='1.7'){
+		if(lib.config.noname_extensionOL_version1=='1.8'){
 			lib.extensionMenu.extension_扩展ol['other_extension_扩展ol_download1'].name='已是最新版';
 			lib.extensionMenu.extension_扩展ol['other_extension_扩展ol_download1'].onclick=function(){};
 		};
