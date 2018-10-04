@@ -1,10 +1,14 @@
 window.func=function(lib,game,ui,get,ai,_status){
-  if(lib.config.noname_extensionOL_version1!='1.2'){
-    game.download('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master/extension.js','extension/扩展ol/extension.js',function(){
+  if(lib.config.noname_extensionOL_version1!='1.8'){
+    if(confirm('是否开始更新扩展ol本体')){
+    game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/extension.js','extension/扩展ol/extension.js',function(){
       alert('扩展ol本体更新完毕，即将重启');
       setTimeout(function(){
         game.reload();
       },1000);
-    },function(){});
+    },function(){
+      alert('更新失败');
+    });
+  };
   };
 }
