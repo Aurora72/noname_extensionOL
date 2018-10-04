@@ -14,7 +14,8 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 },precontent:function (extensionOL){
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
-		if(lib.config.noname_extensionOL_version1!='1.7') game.saveConfig('noname_extensionOL_version1','1.7');
+		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
+		if(lib.config.noname_extensionOL_version1!='1.8') game.saveConfig('noname_extensionOL_version1','1.8');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -89,62 +90,63 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 			lib.init.js(url,list1,function(){
 				lib.content_func.push(window.func);
 			});
-			if(!lib.device){
-				lib.init.js('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master','updateFiles',function(){
-					var list2=[];
-					for(var i=0;i<window.updateFiles.length;i++){
-						if(lib.config['noname_extensionOL_updateFiles'+window.updateFiles[i]]!=true) list2.push(window.updateFiles[i]);
-					};
-					lib.extensionMenu.extension_扩展ol.download.onclick=function(){
-						if(lib.extensionOL_onDownload!=true){
-							lib.extensionOL_onDownload=true;
-							for(var i in lib.program.character){
-								for(var j in lib.characterPack[i]){
-									if(i=='yl'){
-										var str=j+'.png';
-									}else if(i=='nyhzrlj'){
-										var str='New'+j;
-										str=str.slice(0,str.length-2);
-										str=str+'.jpg';
-									}else{
-										var str=j+'.jpg';
-									};
-									if(lib.config['noname_extensionOL_updateFiles'+str]!=true) list2.push(str);
+			lib.init.js('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master','updateFiles',function(){
+				var list2=[];
+				for(var i=0;i<window.updateFiles.length;i++){
+					if(lib.config['noname_extensionOL_updateFiles'][window.updateFiles[i]]!=true) list2.push(window.updateFiles[i]);
+				};
+				lib.extensionMenu.extension_扩展ol.download.onclick=function(){
+					if(lib.extensionOL_onDownload!=true){
+						lib.extensionOL_onDownload=true;
+						for(var i in lib.program.character){
+							for(var j in lib.characterPack[i]){
+								if(i=='yl'){
+									var str=j+'.png';
+								}else if(i=='nyhzrlj'){
+									var str='New'+j;
+									str=str.slice(0,str.length-2);
+									str=str+'.jpg';
+								}else{
+									var str=j+'.jpg';
 								};
+								if(lib.config['noname_extensionOL_updateFiles'][str]!=true) list2.push(str);
 							};
-							if(list2.length==0){
-								alert('素材已是最新');
-								delete lib.extensionOL_onDownload;
-							}else{
-								var num=0;
-								var num1=list2.length;
-								lib.extensionOL_config=this;
-								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
-								var download=function(){
-									game.download('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master/image/'+list2[0],'extension/扩展ol/'+list2[0],function(){
-										num++;
-										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
-										game.saveConfig('noname_extensionOL_updateFiles'+list2[0],true);
-										list2.remove(list2[0]);
-										if(list2.length>0){
-											setTimeout(function(){
-												download();
-											},200);
-										}else{
-											lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成</span>";
-											delete lib.extensionOL_config;
-											delete lib.extensionOL_onDownload;
-										};
-									},function(){});
-								};
-								download();
-							};
-						}else{
-							alert('请等待正在更新的内容更新结束');
 						};
+						if(list2.length==0){
+							alert('素材已是最新');
+							delete lib.extensionOL_onDownload;
+						}else{
+							var num=0;
+							var num1=list2.length;
+							lib.extensionOL_config=this;
+							lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+							var download=function(){
+								game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/image/'+list2[0],'extension/扩展ol/'+list2[0],function(){
+									num++;
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+									lib.config['noname_extensionOL_updateFiles'][list2[0]]=true;
+									game.saveConfig('noname_extensionOL_updateFiles',lib.config['noname_extensionOL_updateFiles']);
+									list2.remove(list2[0]);
+									if(list2.length>0){
+										setTimeout(function(){
+											download();
+										},200);
+									}else{
+										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成</span>";
+										delete lib.extensionOL_config;
+										delete lib.extensionOL_onDownload;
+									};
+								},function(){
+									alert('下载失败');
+								});
+							};
+							download();
+						};
+					}else{
+						alert('请等待正在更新的内容更新结束');
 					};
-				});
-			};
+				};
+			});
 		});
 		lib.extensionMenu.extension_扩展ol.author={
 			"name":"作者：Aurora",
@@ -173,61 +175,47 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				alert('网络链接失败');
 			},
 		};
-		if(!lib.device){
-			lib.extensionMenu.extension_扩展ol.download1={
-				"name":"<span style='text-decoration: underline'>下载扩展ol数据至本地</span>",
-				"clear":true,
-				"onclick":function(){
-					if(lib.extensionOL_onDownload!=true){
-						lib.extensionOL_onDownload=true;
-						if(lib.program!=undefined){
-							var list=[];
-							for(var i in lib.program){
-								for(var j in lib.program[i]){
-									list.push(j);
-								};
-							};
-							list.push('program');
-							list.push('update');
-							var num=0;
-							lib.extensionOL_config=this;
-							lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+list.length+"</span>";
-							for(var i=0;i<list.length;i++){
-								game.download('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master/'+list[i]+'.js','extension/扩展ol/'+list[i]+'.js',function(){
-									num++;
-									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+list.length+"</span>";
-									if(num==list.length){
-										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成</span>";
-										delete lib.extensionOL_config;
-										delete lib.extensionOL_onDownload;
-									};
-								},function(){});
-							};
-						}else{
-							alert('网络链接失败');
-						};
-					}else{
-						alert('请等待正在更新的内容更新结束');
-					};
-				},
-			};
-			lib.extensionMenu.extension_扩展ol.download={
-				"name":"<span style='text-decoration: underline'>更新扩展ol素材</span>",
-				"clear":true,
-				"onclick":function(){
-					alert('网络链接失败');
-				},
-			};
-		};
-		lib.extensionMenu.extension_扩展ol.SJ_URL={
-			"name":"<span style='text-decoration: underline'>数据链接</span>",
+		lib.extensionMenu.extension_扩展ol.download1={
+			"name":"<span style='text-decoration: underline'>下载扩展ol数据至本地</span>",
 			"clear":true,
 			"onclick":function(){
-				window.open('https://coding.net/u/aurora72/p/noname_extensionOL/git');
+				if(lib.extensionOL_onDownload!=true){
+					lib.extensionOL_onDownload=true;
+					if(lib.program!=undefined){
+						var list=[];
+						for(var i in lib.program){
+							for(var j in lib.program[i]){
+								list.push(j);
+							};
+						};
+						list.push('program');
+						list.push('update');
+						var num=0;
+						lib.extensionOL_config=this;
+						lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+list.length+"</span>";
+						for(var i=0;i<list.length;i++){
+							game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/'+list[i]+'.js','extension/扩展ol/'+list[i]+'.js',function(){
+								num++;
+								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+list.length+"</span>";
+								if(num==list.length){
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成</span>";
+									delete lib.extensionOL_config;
+									delete lib.extensionOL_onDownload;
+								};
+							},function(){
+								alert('下载失败');
+							});
+						};
+					}else{
+						alert('网络链接失败');
+					};
+				}else{
+					alert('请等待正在更新的内容更新结束');
+				};
 			},
 		};
-		lib.extensionMenu.extension_扩展ol.SC_URL={
-			"name":"<span style='text-decoration: underline'>素材链接</span>",
+		lib.extensionMenu.extension_扩展ol.download={
+			"name":"<span style='text-decoration: underline'>更新扩展ol素材</span>",
 			"clear":true,
 			"onclick":function(){
 				alert('网络链接失败');
@@ -242,14 +230,13 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 		};
 		lib.init.js('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master','update',function(){
 			lib.extensionMenu.extension_扩展ol.version.name="coding数据版本："+window.version;
-			lib.extensionMenu.extension_扩展ol.SC_URL.onclick=function(){
-				window.open(window.download);
-			};
 			if(lib.config.noname_extensionOL_version!=window.version){
 				game.saveConfig('noname_extensionOL_version',window.version);
 				lib.content_func.push(function(){
 					lib.arenaReady.push(function(){
 						var func=function(){
+							var bool=true;
+							var bool1=true;
 							var dialog=ui.create.dialog('hidden');
 							dialog.style.height='calc(100%)';
 							dialog.style.width='calc(100%)';
@@ -265,8 +252,18 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 							for(var i in window.changelog){
 								dialog.addText(i+'   ('+window.changelog[i].version+')'+'<br>',false);
 								dialog.addText('<li>'+window.changelog[i].info,false);
-								if(window.changelog[i].players!=[]) dialog.addSmall([window.changelog[i].players,'character']);
-								if(window.changelog[i].cards!=[]) dialog.addSmall([window.changelog[i].cards,'vcard']);
+								if(window.changelog[i].players!=[]){
+									for(var j=0;j<window.changelog[i].players.length;j++){
+										if(lib.character[window.changelog[i].players[j]]==undefined) bool=false;
+									};
+								};
+								if(bool==true) dialog.addSmall([window.changelog[i].players,'character']);
+								if(window.changelog[i].cards!=[]){
+									for(var j=0;j<window.changelog[i].cards.length;j++){
+										if(lib.card[window.changelog[i].cards[j]]==undefined) bool1=false;
+									};
+								};
+								if(bool1==true) dialog.addSmall([window.changelog[i].cards,'vcard']);
 							};
 							ui.window.appendChild(dialog);
 						};
@@ -276,6 +273,8 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 			};
 			lib.extensionMenu.extension_扩展ol.changelog.onclick=function(){
 				ui.click.configMenu();
+				var bool=true;
+				var bool1=true;
 				var dialog=ui.create.dialog('hidden');
 				dialog.style.height='calc(100%)';
 				dialog.style.width='calc(100%)';
@@ -291,23 +290,31 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				for(var i in window.changelog){
 					dialog.addText(i+'   ('+window.changelog[i].version+')'+'<br>',false);
 					dialog.addText('<li>'+window.changelog[i].info,false);
-					if(window.changelog[i].players!=[]) dialog.addSmall([window.changelog[i].players,'character']);
-					if(window.changelog[i].cards!=[]) dialog.addSmall([window.changelog[i].cards,'vcard']);
+					if(window.changelog[i].players!=[]){
+						for(var j=0;j<window.changelog[i].players.length;j++){
+							if(lib.character[window.changelog[i].players[j]]==undefined) bool=false;
+						};
+					};
+					if(bool==true) dialog.addSmall([window.changelog[i].players,'character']);
+					if(window.changelog[i].cards!=[]){
+						for(var j=0;j<window.changelog[i].cards.length;j++){
+							if(lib.card[window.changelog[i].cards[j]]==undefined) bool1=false;
+						};
+					};
+					if(bool1==true) dialog.addSmall([window.changelog[i].cards,'vcard']);
 				};
 				ui.window.appendChild(dialog);
 			};
 		});
 		lib.init.js(lib.assetURL+'extension/扩展ol','update',function(){
 			lib.extensionMenu.extension_扩展ol.version2.name="本地数据版本："+window.version;
-			if(!lib.device){
-				if(lib.config.noname_extensionOL_version!=window.version){
-					lib.extensionMenu.extension_扩展ol.download1.name="<span style='text-decoration: underline'>更新扩展ol数据</span>";
-				};
-				if(lib.config.noname_extensionOL_version==window.version){
-					lib.extensionMenu.extension_扩展ol.download1.name="<span style='text-decoration: underline'>本地数据已是最新</span>";
-					lib.extensionMenu.extension_扩展ol.download1.onclick=function(){
-						alert('本地数据已是最新');
-					};
+			if(lib.config.noname_extensionOL_version!=window.version){
+				lib.extensionMenu.extension_扩展ol.download1.name="<span style='text-decoration: underline'>更新扩展ol数据</span>";
+			};
+			if(lib.config.noname_extensionOL_version==window.version){
+				lib.extensionMenu.extension_扩展ol.download1.name="<span style='text-decoration: underline'>本地数据已是最新</span>";
+				lib.extensionMenu.extension_扩展ol.download1.onclick=function(){
+					alert('本地数据已是最新');
 				};
 			};
 			lib.extensionMenu.extension_扩展ol.change.item.local='本地';
