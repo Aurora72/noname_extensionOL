@@ -45,6 +45,6 @@ window.program={
     	"ts":"提示（game.say函数）",
     	"load_NY":"查看加载内容",
     	"other_extension":"其他扩展下载",
-    	"update_extensionOL":"扩展ol本体自动更新",
+    	//"update_extensionOL":"扩展ol本体自动更新",
     },
 }
