@@ -1,6 +1,12 @@
-window.version='1.2.25.52';
+window.version='1.3.25.52';
 window.download='https://pan.baidu.com/s/1WZMw9onOHXCv0I5XD1-p5A';
 window.changelog={
+  '2018.10.05   00:55':{
+    'version':'1.3.25.52',
+    'info':'修复BUG<li>手机端恢复内置更新（须更新至1.8）',
+    'players':[],
+    'cards':[],
+  },
   '2018.10.02   22:49':{
     'version':'1.2.25.52',
     'info':'修复BUG<li>添加内容：<br>--武将：星魔、传奇朱雀',
