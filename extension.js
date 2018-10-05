@@ -130,8 +130,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 									if(list2.length>0){
 										download();
 									}else{
-										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效（点击重启）</span>";
-										lib.extensionMenu.extension_扩展ol['download'].onclick=function(){window.location.reload()};
+										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效</span>";
 										delete lib.extensionOL_config;
 										delete lib.extensionOL_onDownload;
 									};
@@ -207,8 +206,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 								if(list.length>0){
 									download();
 								}else{
-									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效（点击重启）</span>";
-									lib.extensionMenu.extension_扩展ol['download1'].onclick=function(){window.location.reload()};
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效</span>";
 									delete lib.extensionOL_config;
 									delete lib.extensionOL_onDownload;
 								};
