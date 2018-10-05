@@ -40,8 +40,7 @@ window.func=function(lib,game,ui,get,ai,_status){
 					lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载...</span>";
 					game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/extension.js','extension/扩展ol/extension.js',function(){
 						alert('扩展ol本体更新完毕');
-                        lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效（点击重启）</span>";
-                        lib.extensionMenu.extension_扩展ol['other_extension_扩展ol_download1'].onclick=function(){window.location.reload()};
+                        lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效</span>";
 						delete lib.extensionOL_config;
 						delete lib.extensionOL_onDownload;
 					},function(){
