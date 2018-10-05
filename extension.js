@@ -330,6 +330,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				};
 				ui.window.appendChild(dialog);
 			};
+		});
+		lib.init.js(lib.assetURL+'extension/扩展ol','update',function(){
+			lib.extensionMenu.extension_扩展ol.version2.name="本地数据版本："+window.version;
 			if(lib.config.noname_extensionOL_version!=window.version){
 				lib.extensionMenu.extension_扩展ol.download1.name="<span style='text-decoration: underline'>更新扩展ol数据</span>";
 			};
@@ -339,9 +342,6 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 					alert('本地数据已是最新');
 				};
 			};
-		});
-		lib.init.js(lib.assetURL+'extension/扩展ol','update',function(){
-			lib.extensionMenu.extension_扩展ol.version2.name="本地数据版本："+window.version;
 			lib.extensionMenu.extension_扩展ol.change.item.local='本地';
 		});
 		delete lib.config.mode;
