@@ -18,7 +18,7 @@ window.func=function(lib,game,ui,get,ai,_status){
 			window.open('https://pan.baidu.com/s/1zINohaB_xVynumVVS4yDwg');
 		},
 	};
-	str='——————————————<br>扩展ol   （1.8）';
+	str='——————————————<br>扩展ol   （1.9）';
 	if(lib.config.noname_extensionOL_version1==undefined){
 		str+='<br>当前版本：1.0';
 	}else{
@@ -55,7 +55,7 @@ window.func=function(lib,game,ui,get,ai,_status){
 				};
 		},
 	};
-	if(lib.config.noname_extensionOL_version1=='1.8'){
+	if(lib.config.noname_extensionOL_version1=='1.9'){
 		lib.extensionMenu.extension_扩展ol['other_extension_扩展ol_download1'].name='已是最新版';
 		lib.extensionMenu.extension_扩展ol['other_extension_扩展ol_download1'].onclick=function(){};
 	};
