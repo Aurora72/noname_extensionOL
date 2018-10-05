@@ -15,7 +15,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.9') game.saveConfig('noname_extensionOL_version1','1.9');
+		if(lib.config.noname_extensionOL_version1!='1.9.1') game.saveConfig('noname_extensionOL_version1','1.9.1');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -199,7 +199,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 						lib.extensionOL_config=this;
 						lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
 						var download=function(){
-							game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/'+list[i]+'.js','extension/扩展ol/'+list[i]+'.js',function(){
+							game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/'+list[0]+'.js','extension/扩展ol/'+list[0]+'.js',function(){
 								num++;
 								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
 								list.remove(list[0]);
