@@ -18,24 +18,17 @@ window.func=function(lib,game,ui,get,ai,_status){
 			window.open('https://pan.baidu.com/s/1zINohaB_xVynumVVS4yDwg');
 		},
 	};
-	str='——————————————<br>扩展ol   （1.7）';
+	str='——————————————<br>扩展ol   （1.8）';
 	if(lib.config.noname_extensionOL_version1==undefined){
 		str+='<br>当前版本：1.0';
 	}else{
 		str+='<br>当前版本：'+lib.config.noname_extensionOL_version1;
 	};
-	str+='<br>更新内容：<br>电脑端恢复内置更新';
+	str+='<br>更新内容：<br>手机端恢复内置更新';
 	lib.extensionMenu.extension_扩展ol['other_extension_扩展ol']={
 		"name":str,
 		"clear":true,
 		"nopointer":true,
-	};
-	lib.extensionMenu.extension_扩展ol['other_extension_扩展ol_download']={
-		"name":"<span style='text-decoration: underline'>更新链接</span>",
-		"clear":true,
-		"onclick":function(){
-			window.open('https://pan.baidu.com/s/15WCRdPriFXQowQNQ-dWkUw');
-		},
 	};
 	lib.extensionMenu.extension_扩展ol['other_extension_扩展ol_download1']={
 		"name":"<span style='text-decoration: underline'>自动更新扩展ol</span>",
