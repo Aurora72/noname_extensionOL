@@ -15,7 +15,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.8') game.saveConfig('noname_extensionOL_version1','1.8');
+		if(lib.config.noname_extensionOL_version1!='1.9') game.saveConfig('noname_extensionOL_version1','1.9');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -128,16 +128,21 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 									game.saveConfig('noname_extensionOL_updateFiles',lib.config['noname_extensionOL_updateFiles']);
 									list2.remove(list2[0]);
 									if(list2.length>0){
-										setTimeout(function(){
-											download();
-										},200);
+										download();
 									}else{
-										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成</span>";
+										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效（点击重启）</span>";
+										lib.extensionMenu.extension_扩展ol['download'].onclick=function(){window.location.reload()};
 										delete lib.extensionOL_config;
 										delete lib.extensionOL_onDownload;
 									};
 								},function(){
 									alert('下载失败');
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>点击重新下载</span>";
+									num=0;
+									num1=0;
+									list2=[];
+									delete lib.extensionOL_config;
+									delete lib.extensionOL_onDownload;
 								});
 							};
 							download();
@@ -191,21 +196,33 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 						list.push('program');
 						list.push('update');
 						var num=0;
+						var num1=list.length;
 						lib.extensionOL_config=this;
-						lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+list.length+"</span>";
-						for(var i=0;i<list.length;i++){
+						lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+						var download=function(){
 							game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/'+list[i]+'.js','extension/扩展ol/'+list[i]+'.js',function(){
 								num++;
-								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+list.length+"</span>";
-								if(num==list.length){
-									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成</span>";
+								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+								list.remove(list[0]);
+								if(list.length>0){
+									download();
+								}else{
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效（点击重启）</span>";
+									lib.extensionMenu.extension_扩展ol['download1'].onclick=function(){window.location.reload()};
 									delete lib.extensionOL_config;
 									delete lib.extensionOL_onDownload;
 								};
 							},function(){
 								alert('下载失败');
+								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>点击重新下载</span>";
+								num=0;
+								num1=0;
+								list2=[];
+								delete lib.extensionOL_config;
+								delete lib.extensionOL_onDownload;
 							});
 						};
+						download();
 					}else{
 						alert('网络链接失败');
 					};
