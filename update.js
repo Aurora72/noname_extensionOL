@@ -1,6 +1,18 @@
-window.version='1.3.25.52';
+window.version='1.3.25.53';
 window.download='https://pan.baidu.com/s/1WZMw9onOHXCv0I5XD1-p5A';
 window.changelog={
+  '2018.10.05   22:50':{
+    'version':'1.3.25.53',
+    'info':'修复BUG<li>优化下载（须更新至1.9）',
+    'players':[],
+    'cards':[],
+  },
+  '2018.10.05   00:55':{
+    'version':'1.3.25.52',
+    'info':'昨天太困了，没有具体地写更新内容，现在补回来<li>素材下载记录变名，素材下载重新开始计算，但优化下载完成后的重启速度<li>下载来源改为github，所以下载速度可能有所减慢<li>删除手动更新的链接',
+    'players':[],
+    'cards':[],
+  },
   '2018.10.05   00:55':{
     'version':'1.3.25.52',
     'info':'修复BUG<li>手机端恢复内置更新（须更新至1.8）',
