@@ -179,55 +179,65 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				alert('网络链接失败');
 			},
 		};
-		lib.extensionMenu.extension_扩展ol.download1={
-			"name":"<span style='text-decoration: underline'>下载扩展ol数据至本地</span>",
-			"clear":true,
-			"onclick":function(){
-				if(lib.extensionOL_onDownload!=true){
-					lib.extensionOL_onDownload=true;
-					if(lib.program!=undefined){
-						var list=[];
-						for(var i in lib.program){
-							for(var j in lib.program[i]){
-								list.push(j);
+		if(!lib.device){
+			lib.extensionMenu.extension_扩展ol.download1={
+				"name":"<span style='text-decoration: underline'>下载扩展ol数据至本地</span>",
+				"clear":true,
+				"onclick":function(){
+					if(lib.extensionOL_onDownload!=true){
+						lib.extensionOL_onDownload=true;
+						if(lib.program!=undefined){
+							var list=[];
+							for(var i in lib.program){
+								for(var j in lib.program[i]){
+									list.push(j);
+								};
 							};
-						};
-						list.push('program');
-						list.push('update');
-						var num=0;
-						var num1=list.length;
-						lib.extensionOL_config=this;
-						lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
-						var download=function(){
-							game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/'+list[0]+'.js','extension/扩展ol/'+list[0]+'.js',function(){
-								num++;
-								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
-								list.remove(list[0]);
-								if(list.length>0){
-									download();
-								}else{
-									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效</span>";
+							list.push('program');
+							list.push('update');
+							var num=0;
+							var num1=list.length;
+							lib.extensionOL_config=this;
+							lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+							var download=function(){
+								game.download('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master/'+list[0]+'.js','extension/扩展ol/'+list[0]+'.js',function(){
+									num++;
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+									list.remove(list[0]);
+									if(list.length>0){
+										download();
+									}else{
+										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效</span>";
+										delete lib.extensionOL_config;
+										delete lib.extensionOL_onDownload;
+									};
+								},function(){
+									alert('下载失败');
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>点击重新下载</span>";
+									num=0;
+									num1=0;
+									list2=[];
 									delete lib.extensionOL_config;
 									delete lib.extensionOL_onDownload;
-								};
-							},function(){
-								alert('下载失败');
-								lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>点击重新下载</span>";
-								num=0;
-								num1=0;
-								list2=[];
-								delete lib.extensionOL_config;
-								delete lib.extensionOL_onDownload;
-							});
+								});
+							};
+							download();
+						}else{
+							alert('网络链接失败');
 						};
-						download();
 					}else{
-						alert('网络链接失败');
+						alert('请等待正在更新的内容更新结束');
 					};
-				}else{
-					alert('请等待正在更新的内容更新结束');
-				};
-			},
+				},
+			};
+		}else{
+			lib.extensionMenu.extension_扩展ol.SJ_URL={
+				"name":"<span style='text-decoration: underline'>数据链接</span>",
+				"clear":true,
+				"onclick":function(){
+					window.open('https://coding.net/u/aurora72/p/noname_extensionOL/git');
+				},
+			};
 		};
 		lib.extensionMenu.extension_扩展ol.download={
 			"name":"<span style='text-decoration: underline'>更新扩展ol素材</span>",
@@ -320,9 +330,6 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				};
 				ui.window.appendChild(dialog);
 			};
-		});
-		lib.init.js(lib.assetURL+'extension/扩展ol','update',function(){
-			lib.extensionMenu.extension_扩展ol.version2.name="本地数据版本："+window.version;
 			if(lib.config.noname_extensionOL_version!=window.version){
 				lib.extensionMenu.extension_扩展ol.download1.name="<span style='text-decoration: underline'>更新扩展ol数据</span>";
 			};
@@ -332,6 +339,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 					alert('本地数据已是最新');
 				};
 			};
+		});
+		lib.init.js(lib.assetURL+'extension/扩展ol','update',function(){
+			lib.extensionMenu.extension_扩展ol.version2.name="本地数据版本："+window.version;
 			lib.extensionMenu.extension_扩展ol.change.item.local='本地';
 		});
 		delete lib.config.mode;
