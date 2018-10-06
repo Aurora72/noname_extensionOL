@@ -15,7 +15,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.9.2') game.saveConfig('noname_extensionOL_version1','1.9.2');
+		if(lib.config.noname_extensionOL_version1!='1.9.3') game.saveConfig('noname_extensionOL_version1','1.9.3');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -333,6 +333,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 		});
 		lib.init.js(lib.assetURL+'extension/扩展ol','update',function(){
 			lib.extensionMenu.extension_扩展ol.version2.name="本地数据版本："+window.version;
+			if(!lib.device){
 			if(lib.config.noname_extensionOL_version!=window.version){
 				lib.extensionMenu.extension_扩展ol.download1.name="<span style='text-decoration: underline'>更新扩展ol数据</span>";
 			};
@@ -341,6 +342,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				lib.extensionMenu.extension_扩展ol.download1.onclick=function(){
 					alert('本地数据已是最新');
 				};
+			};
 			};
 			lib.extensionMenu.extension_扩展ol.change.item.local='本地';
 		});
