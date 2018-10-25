@@ -15,7 +15,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.9.4') game.saveConfig('noname_extensionOL_version1','1.9.4');
+		if(lib.config.noname_extensionOL_version1!='1.9.5') game.saveConfig('noname_extensionOL_version1','1.9.5');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -263,8 +263,6 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				lib.content_func.push(function(){
 					lib.arenaReady.push(function(){
 						var func=function(){
-							var bool=true;
-							var bool1=true;
 							var dialog=ui.create.dialog('hidden');
 							dialog.style.height='calc(100%)';
 							dialog.style.width='calc(100%)';
@@ -278,20 +276,22 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 							div.style.left='calc(50% - 35px)';
 							dialog.add(div);
 							for(var i in window.changelog){
+								var list=[];
+								var list1=[];
 								dialog.addText(i+'   ('+window.changelog[i].version+')'+'<br>',false);
 								dialog.addText('<li>'+window.changelog[i].info,false);
-								if(window.changelog[i].players!=[]){
+								if(window.changelog[i].players.length>0){
 									for(var j=0;j<window.changelog[i].players.length;j++){
-										if(lib.character[window.changelog[i].players[j]]==undefined) bool=false;
+										if(lib.character[window.changelog[i].players[j]]!=undefined) list.push(window.changelog[i].players[j]);
 									};
 								};
-								if(bool==true) dialog.addSmall([window.changelog[i].players,'character']);
-								if(window.changelog[i].cards!=[]){
+								if(list.length>0) dialog.addSmall([list,'character']);
+								if(window.changelog[i].cards.length>0){
 									for(var j=0;j<window.changelog[i].cards.length;j++){
-										if(lib.card[window.changelog[i].cards[j]]==undefined) bool1=false;
+										if(lib.card[window.changelog[i].cards[j]]!=undefined) list1.push(window.changelog[i].cards[j]);
 									};
 								};
-								if(bool1==true) dialog.addSmall([window.changelog[i].cards,'vcard']);
+								if(list1.length>0) dialog.addSmall([list1,'vcard']);
 							};
 							ui.window.appendChild(dialog);
 						};
@@ -301,8 +301,6 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 			};
 			lib.extensionMenu.extension_扩展ol.changelog.onclick=function(){
 				ui.click.configMenu();
-				var bool=true;
-				var bool1=true;
 				var dialog=ui.create.dialog('hidden');
 				dialog.style.height='calc(100%)';
 				dialog.style.width='calc(100%)';
@@ -316,20 +314,22 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				div.style.left='calc(50% - 35px)';
 				dialog.add(div);
 				for(var i in window.changelog){
+					var list=[];
+					var list1=[];
 					dialog.addText(i+'   ('+window.changelog[i].version+')'+'<br>',false);
 					dialog.addText('<li>'+window.changelog[i].info,false);
-					if(window.changelog[i].players!=[]){
+					if(window.changelog[i].players.length>0){
 						for(var j=0;j<window.changelog[i].players.length;j++){
-							if(lib.character[window.changelog[i].players[j]]==undefined) bool=false;
+							if(lib.character[window.changelog[i].players[j]]!=undefined) list.push(window.changelog[i].players[j]);
 						};
 					};
-					if(bool==true) dialog.addSmall([window.changelog[i].players,'character']);
-					if(window.changelog[i].cards!=[]){
+					if(list.length>0) dialog.addSmall([list,'character']);
+					if(window.changelog[i].cards.length>0){
 						for(var j=0;j<window.changelog[i].cards.length;j++){
-							if(lib.card[window.changelog[i].cards[j]]==undefined) bool1=false;
+							if(lib.card[window.changelog[i].cards[j]]!=undefined) list1.push(window.changelog[i].cards[j]);
 						};
 					};
-					if(bool1==true) dialog.addSmall([window.changelog[i].cards,'vcard']);
+					if(list1.length>0) dialog.addSmall([list1,'vcard']);
 				};
 				ui.window.appendChild(dialog);
 			};
