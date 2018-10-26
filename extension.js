@@ -15,7 +15,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.9.5') game.saveConfig('noname_extensionOL_version1','1.9.5');
+		if(lib.config.noname_extensionOL_version1!='1.10.5') game.saveConfig('noname_extensionOL_version1','1.10.5');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -95,8 +95,16 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 			});
 			lib.init.js('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master','updateFiles',function(){
 				var list2=[];
+				var list3=[];
+				var list4=[];
 				for(var i=0;i<window.updateFiles.length;i++){
 					if(lib.config['noname_extensionOL_updateFiles'][window.updateFiles[i]]!=true) list2.push(window.updateFiles[i]);
+				};
+				for(var i=0;i<window.updateFiles1.length;i++){
+					if(lib.config['noname_extensionOL_updateFiles'][window.updateFiles1[i]]!=true) list3.push(window.updateFiles1[i]);
+				};
+				for(var i=0;i<window.updateFiles2.length;i++){
+					if(lib.config['noname_extensionOL_updateFiles'][window.updateFiles2[i]]!=true) list4.push(window.updateFiles2[i]);
 				};
 				lib.extensionMenu.extension_扩展ol.download.onclick=function(){
 					if(lib.extensionOL_onDownload!=true){
@@ -143,6 +151,86 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 									num=0;
 									num1=0;
 									list2=[];
+									delete lib.extensionOL_config;
+									delete lib.extensionOL_onDownload;
+								});
+							};
+							download();
+						};
+					}else{
+						alert('请等待正在更新的内容更新结束');
+					};
+				};
+				lib.extensionMenu.extension_扩展ol.download11.onclick=function(){
+					if(lib.extensionOL_onDownload!=true){
+						lib.extensionOL_onDownload=true;
+						if(list3.length==0){
+							alert('素材已是最新');
+							delete lib.extensionOL_onDownload;
+						}else{
+							var num=0;
+							var num1=list3.length;
+							lib.extensionOL_config=this;
+							lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+							var download=function(){
+								game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/audio/skill/'+list3[0],'extension/扩展ol/'+list3[0],function(){
+									num++;
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+									lib.config['noname_extensionOL_updateFiles'][list3[0]]=true;
+									game.saveConfig('noname_extensionOL_updateFiles',lib.config['noname_extensionOL_updateFiles']);
+									list3.remove(list3[0]);
+									if(list3.length>0){
+										download();
+									}else{
+										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效</span>";
+										delete lib.extensionOL_config;
+										delete lib.extensionOL_onDownload;
+									};
+								},function(){
+									alert('下载失败');
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>点击重新下载</span>";
+									num=0;
+									num1=0;
+									delete lib.extensionOL_config;
+									delete lib.extensionOL_onDownload;
+								});
+							};
+							download();
+						};
+					}else{
+						alert('请等待正在更新的内容更新结束');
+					};
+				};
+				lib.extensionMenu.extension_扩展ol.download12.onclick=function(){
+					if(lib.extensionOL_onDownload!=true){
+						lib.extensionOL_onDownload=true;
+						if(list4.length==0){
+							alert('素材已是最新');
+							delete lib.extensionOL_onDownload;
+						}else{
+							var num=0;
+							var num1=list4.length;
+							lib.extensionOL_config=this;
+							lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+							var download=function(){
+								game.download('https://raw.githubusercontent.com/aurora72/noname_extensionOL/master/audio/die/'+list4[0],'audio/die/'+list4[0],function(){
+									num++;
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>正在下载："+num+"/"+num1+"</span>";
+									lib.config['noname_extensionOL_updateFiles'][list4[0]]=true;
+									game.saveConfig('noname_extensionOL_updateFiles',lib.config['noname_extensionOL_updateFiles']);
+									list4.remove(list4[0]);
+									if(list4.length>0){
+										download();
+									}else{
+										lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>下载完成，重启生效</span>";
+										delete lib.extensionOL_config;
+										delete lib.extensionOL_onDownload;
+									};
+								},function(){
+									alert('下载失败');
+									lib.extensionOL_config.innerHTML="<span style='text-decoration: underline'>点击重新下载</span>";
+									num=0;
+									num1=0;
 									delete lib.extensionOL_config;
 									delete lib.extensionOL_onDownload;
 								});
@@ -243,7 +331,21 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 			};
 		};
 		lib.extensionMenu.extension_扩展ol.download={
-			"name":"<span style='text-decoration: underline'>更新扩展ol素材</span>",
+			"name":"<span style='text-decoration: underline'>下载图片素材</span>",
+			"clear":true,
+			"onclick":function(){
+				alert('网络链接失败');
+			},
+		};
+		lib.extensionMenu.extension_扩展ol.download11={
+			"name":"<span style='text-decoration: underline'>下载技能配音素材</span>",
+			"clear":true,
+			"onclick":function(){
+				alert('网络链接失败');
+			},
+		};
+		lib.extensionMenu.extension_扩展ol.download12={
+			"name":"<span style='text-decoration: underline'>下载死亡配音素材</span>",
 			"clear":true,
 			"onclick":function(){
 				alert('网络链接失败');
