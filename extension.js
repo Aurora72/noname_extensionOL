@@ -79,7 +79,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				var pl=game.players[i];
 				pl.getId();
 				pl.style.backgroundSize='100% 100%';
-				pl.setBackgroundImage('extension/成对模式/'+num+'.jpg');
+				pl.setBackgroundImage('extension/扩展ol/'+num+'.jpg');
 				pl.identity=get.cnNumber(num);
 				pl.setIdentity(get.cnNumber(num));
 				if(num==1) pl.node.identity.dataset.color='zhu';
@@ -372,7 +372,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.11.5') game.saveConfig('noname_extensionOL_version1','1.11.5');
+		if(lib.config.noname_extensionOL_version1!='1.11.6') game.saveConfig('noname_extensionOL_version1','1.11.6');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
