@@ -372,7 +372,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.11.6') game.saveConfig('noname_extensionOL_version1','1.11.6');
+		if(lib.config.noname_extensionOL_version1!='1.11.7') game.saveConfig('noname_extensionOL_version1','1.11.7');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -477,6 +477,28 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 								}else{
 									var str=j+'.jpg';
 								};
+								if(lib.config['noname_extensionOL_updateFiles'][str]!=true) list2.push(str);
+							};
+						};
+						if(lib.achievement!=undefined){
+							for(var i in lib.achievement.course){
+								var str=i+'.jpg';
+								if(lib.config['noname_extensionOL_updateFiles'][str]!=true) list2.push(str);
+							};
+							for(var i in lib.achievement.wu){
+								var str=i+'.jpg';
+								if(lib.config['noname_extensionOL_updateFiles'][str]!=true) list2.push(str);
+							};
+							for(var i in lib.achievement.shu){
+								var str=i+'.jpg';
+								if(lib.config['noname_extensionOL_updateFiles'][str]!=true) list2.push(str);
+							};
+							for(var i in lib.achievement.wei){
+								var str=i+'.jpg';
+								if(lib.config['noname_extensionOL_updateFiles'][str]!=true) list2.push(str);
+							};
+							for(var i in lib.achievement.qun){
+								var str=i+'.jpg';
 								if(lib.config['noname_extensionOL_updateFiles'][str]!=true) list2.push(str);
 							};
 						};
