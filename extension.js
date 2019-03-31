@@ -372,7 +372,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 	if(extensionOL.enable){
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.11.7') game.saveConfig('noname_extensionOL_version1','1.11.7');
+		if(lib.config.noname_extensionOL_version1!='1.11.8') game.saveConfig('noname_extensionOL_version1','1.11.8');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -391,7 +391,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 				"nopointer":true,
 			};
 			lib.extensionMenu.extension_扩展ol.enableCharacter1={
-				"name":"设置后武将数据仍在，但ai禁用，玩家禁选（自由选择除外）",
+				"name":"设置后禁用武将包",
 				"clear":true,
 				"nopointer":true,
 			};
