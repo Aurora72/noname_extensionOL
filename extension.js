@@ -1053,7 +1053,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 								lib.init.js(lib.assetURL+'mode',lib.config.mode,proceed);
 							},500);
 						}else{
-							alert('扩展ol的模块加载中...')
+							alert('扩展ol的模块加载中，请关闭警示框后耐心等待');
 						};
 					}
 					var downNode=function(){
