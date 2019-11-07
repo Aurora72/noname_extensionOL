@@ -376,7 +376,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"æ‰©å±
 			height:"calc(100%)",
 			display:"table",
 			background:'rgba(0,0,0,0.5)',
-			border:"1px solid #ccc",
+			//border:"1px solid #ccc",
 			position:"absolute",
 			top:"0px",
 			left:"0px",
