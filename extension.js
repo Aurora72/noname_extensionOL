@@ -394,8 +394,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"æ‰©å±
 		localStorage.setItem(lib.configprefix+'loadtime',20000);
 		var ext_onload=lib.init.onload;
 		lib.init.onload=function(){
-			if(window.ext_loaded==true){
+			if(window.ext_loaded==true&&window.ext_loaded1!=true){
 				ext_onload();
+				window.ext_loaded1=true;
 			};
 		};
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
