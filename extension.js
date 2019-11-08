@@ -388,7 +388,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 			kzol_loading.style[k]=kzol_loading_style[k];
 		};
 		kzol_loading.style.lineHeight=document.body.clientHeight+'px';
-		kzol_loading.innerHTML='<span style="font-size:37px;font-weight:500;font-family:xinwei">扩展ol模块加载中</span>';
+		kzol_loading.innerHTML='<span style="font-size:37px;font-weight:500;font-family:xinwei">正在加载扩展ol模块中</span>';
 		document.body.appendChild(kzol_loading);
 		game.saveConfig('max_loadtime',20000);
 		localStorage.setItem(lib.configprefix+'loadtime',20000);
@@ -401,7 +401,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 		};
 		if(lib.config.noname_extensionOL_version==undefined) game.saveConfig('noname_extensionOL_version','1.0.0.0');
 		if(lib.config.noname_extensionOL_updateFiles==undefined) game.saveConfig('noname_extensionOL_updateFiles',{});
-		if(lib.config.noname_extensionOL_version1!='1.12.10') game.saveConfig('noname_extensionOL_version1','1.12.10');
+		if(lib.config.noname_extensionOL_version1!='1.12.11') game.saveConfig('noname_extensionOL_version1','1.12.11');
 		delete lib.extensionMenu.extension_扩展ol.delete;
 		delete lib.extensionMenu.extension_扩展ol.edit;
 		lib.content_func=[];
@@ -475,12 +475,16 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"扩�
 			};
 			var load_num=list.length;
 			var load_num1=list1.length;
+			var load_num2=list.length+list1.length;
+			kzol_loading.innerHTML='<span style="font-size:37px;font-weight:500;font-family:xinwei">正在加载扩展ol模块中（'+(load_num2-(load_num+load_num1))+'/'+load_num2+'）</span>';
 			lib.init.js(url,list,function(){
 				window.func(lib,game,ui,get,ai,_status);
+				kzol_loading.innerHTML='<span style="font-size:37px;font-weight:500;font-family:xinwei">正在加载扩展ol模块中（'+(load_num2-(load_num+load_num1))+'/'+load_num2+'）</span>';
 				load_num--;
 			});
 			lib.init.js(url,list1,function(){
 				lib.content_func.push(window.func);
+				kzol_loading.innerHTML='<span style="font-size:37px;font-weight:500;font-family:xinwei">正在加载扩展ol模块中（'+(load_num2-(load_num+load_num1))+'/'+load_num2+'）</span>';
 				load_num1--;
 			});
 			lib.init.js('https://coding.net/u/aurora72/p/noname_extensionOL/git/raw/master','updateFiles',function(){
