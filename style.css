@@ -1,0 +1,57 @@
+@charset 'utf-8';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.hide-system-cursor {
+    cursor: none;
+    user-select: none;
+}
+
+.cursor {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+	z-index: 99999;
+}
+
+.cursor .horizontal {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+	z-index: 99999;
+}
+
+.cursor .vertical {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -1px;
+    width: 2px;
+    height: 100%;
+    background-color: #fff;
+	z-index: 99999;
+}
+
+.cursor .middle {
+    content: ' ';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    left: 50%;
+    top: 50%;
+    margin-left: -6px;
+    margin-top: -6px;
+    border: 2px solid #fff;
+	z-index: 99999;
+}
+
+.cursor .moving {
+    margin: 0;
+}

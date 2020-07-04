@@ -1,0 +1,29 @@
+window.func=function(lib,game,ui,get,ai,_status){
+	lib.extensionMenu.extension_扩展ol.ldmsxx_title={
+		"name":"<b><p align=center><span style=\"font-size:18px\">----乱斗模式----</span></b>",
+		"clear":true,
+		"nopointer":true,
+	};
+	lib.extensionMenu.extension_扩展ol.ldmsxx_jldj={
+		name:'事件将池（极略对决）',
+		init:'tb',
+		item:{
+			tb:'同步',
+			qb:'全部'
+		},
+	};
+	lib.extensionMenu.extension_扩展ol.ldmsxx_jsmsyx={
+		"name":"僵尸模式背景音乐",
+		"init":true,
+	};
+	/*
+	lib.extensionMenu.extension_扩展ol.ldmsxx_wj={
+		name:'事件将池（无尽模式）',
+		init:'tb',
+		item:{
+			tb:'同步',
+			qb:'全部'
+		},
+	};
+	*/
+}
